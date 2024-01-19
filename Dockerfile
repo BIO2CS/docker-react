@@ -1,7 +1,9 @@
 FROM node:16-alpine as builder
 WORKDIR "/app"
 COPY package.json .
-RUN npm install
+RUN npm cache clean --force && \
+    npm install -g npm@latest && \
+    npm install
 COPY . . 
 RUN npm run build
 
